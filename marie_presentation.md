@@ -2,6 +2,45 @@
 % Sebastien Bah
 % March 2019
 
+# Memory Preamble
+A few things before we get into MARIE
+
+- Endianness
+- Types of Addressing
+
+## Endianness
+Assume we want to store a 4 Byte integer: **ABCDEF01**.
+
+How would you place it in memory? (X is a memory address, X+1 is the next one,...)
+
+## ABCDEF01
+| Endianness    	|  X 	| X+1 	| X+2 	| X+3 	|
+|---------------	|:--:	|-----	|-----	|-----	|
+| Big Endian    	| AB 	| CD  	| EF  	| 01  	|
+| Little Endian 	| 01 	| EF  	| CD  	| AB  	|
+
+**Note that the order of the Bytes change, not the content of the Bytes**
+
+
+## Addressing Modes
+
+Best shown with an example, Let us say the operation was *LOAD 800*, consider it through the following modes (result goes into the AC).
+
+
+- **Immediate** [take values as is]
+- **Direct** [value to load is at address given]
+- **Indirect**  [address given leads to address of where the value is stored]
+- **Indexed** [add the value given in the command with the value of a register, result is effective address]
+
+-------------------------
+
+![Content of Memory](files/AddressingModes.png)
+![Different Modes](files/AddressingModesResult.png)
+
+
+
+
+
 
 # Setup
 

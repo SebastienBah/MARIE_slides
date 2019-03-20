@@ -53,6 +53,57 @@
   <p class="date">March 2019</p>
 </section>
 
+<section><section id="memory-preamble" class="title-slide slide level1"><h1>Memory Preamble</h1><p>A few things before we get into MARIE</p>
+<ul>
+<li class="fragment">Endianness</li>
+<li class="fragment">Types of Addressing</li>
+</ul></section><section id="endianness" class="slide level2">
+<h2>Endianness</h2>
+<p>Assume we want to store a 4 Byte integer: <strong>ABCDEF01</strong>.</p>
+<p>How would you place it in memory? (X is a memory address, X+1 is the next one,…)</p>
+</section><section id="abcdef01" class="slide level2">
+<h2>ABCDEF01</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Endianness</th>
+<th style="text-align: center;">X</th>
+<th>X+1</th>
+<th>X+2</th>
+<th>X+3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Big Endian</td>
+<td style="text-align: center;">AB</td>
+<td>CD</td>
+<td>EF</td>
+<td>01</td>
+</tr>
+<tr class="even">
+<td>Little Endian</td>
+<td style="text-align: center;">01</td>
+<td>EF</td>
+<td>CD</td>
+<td>AB</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note that the order of the Bytes change, not the content of the Bytes</strong></p>
+</section><section id="addressing-modes" class="slide level2">
+<h2>Addressing Modes</h2>
+<p>Best shown with an example, Let us say the operation was <em>LOAD 800</em>, consider it through the following modes (result goes into the AC).</p>
+<ul>
+<li class="fragment"><strong>Immediate</strong> [take values as is]</li>
+<li class="fragment"><strong>Direct</strong> [value to load is at address given]</li>
+<li class="fragment"><strong>Indirect</strong> [address given leads to address of where the value is stored]</li>
+<li class="fragment"><strong>Indexed</strong> [add the value given in the command with the value of a register, result is effective address]</li>
+</ul>
+</section><section class="slide level2">
+
+<p><img data-src="files/AddressingModes.png" alt="Content of Memory" /> <img data-src="files/AddressingModesResult.png" alt="Different Modes" /></p>
+</section></section>
 <section id="setup" class="title-slide slide level1"><h1>Setup</h1><p>Things you will need:</p>
 <ul>
 <li class="fragment"><a href="https://github.com/MARIE-js/MARIE.js/wiki/MARIE-Instruction-Set-(with-Opcodes)">Documentation</a></li>
