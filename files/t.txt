@@ -1,7 +1,0 @@
-t.txt
-
-:Author: Sebastien Bah
-:Email: sebastien.bah@mail.mcgill.ca
-:Date: 2019-03-20 10:21
-
-test
