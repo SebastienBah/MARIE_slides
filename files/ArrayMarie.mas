@@ -3,6 +3,7 @@
 
 // EX: first input 8 (dec)
 // Subsequent: [67, 79, 77, 80, 32, 50, 50, 56] (all dec)
+// or ['0x43', '0x4f', '0x4d', '0x50', '0x20', '0x32', '0x32', '0x38']
 // Put your output mode to unicode
 		ORG 010
 Start,     	Input
@@ -50,6 +51,6 @@ End,		Halt
 // Variables
 ONE, 		DEC 1
 LenArray, 	DEC 0
-StartIndex,	HEX 10
+StartIndex,	HEX 0
 NextPos,	HEX 0
 Index, 		DEC 0
