@@ -1,0 +1,40 @@
+﻿// What is the value of UNKNOWN for the 
+//      function to be  A = 2Y - Z 
+                Input
+                Store UNKNOWN
+           
+Start,          Load UNKNOWN
+		Subt ONE
+                Store UNKNOWN
+                Skipcond 800
+                Jump End
+            
+Ops,		Load Y
+		Add ONE
+		Subt Z
+                Store A
+                Jump Start
+            
+// End of your function
+End, 		Load A
+		Add Y
+                Subt ONE
+                Store A
+		Load UNKNOWN
+		Subt TWO
+           	Store UNKNOWN
+		Skipcond 000
+                Jump End
+                Load A
+		Output
+                Halt
+
+// Constants
+ONE,		DEC	1
+TWO,		DEC	2
+THREE,		DEC 	3
+// Variables
+UNKNOWN, 	DEC 	0
+Y,		DEC 	5
+Z, 		DEC	34
+A,		DEC 	0

@@ -1,0 +1,81 @@
+% MARIE Examples
+% Sebastien Bah
+% March 2019
+
+
+# Setup
+
+Things you will need:
+
+- [Documentation](https://github.com/MARIE-js/MARIE.js/wiki/MARIE-Instruction-Set-(with-Opcodes))
+- [Simulator](https://marie.js.org/#)
+
+# Multiplication
+How do you multiply? Let's say you want to do $x = 5x+y$ ?
+
+Write a quick function?
+
+## Code
+```{include=files/MultiplicationEmpty.mas}
+```
+
+## Candidate
+```{include=files/Multiplication.mas}
+```
+
+# Jumps
+```{include=files/Jumps.mas}
+```
+
+# Subroutines
+*Recall*:
+
+- **JnS**  --> *Stores* the value of PC at address X and *Jumps* to X+1      
+- **JumpI** --> Uses the *value at the memory address X* as the addres to *Jump* to 
+
+## Code
+```{include=files/Subroutine.mas}
+```
+
+# Skip conditions
+*Recall*:
+
+- Skipcond 000 -> Skips next line if $AC<0$
+- Skipcond 400 -> Skips next line if $AC=0$
+- Skipcond 800 -> Skips next line if $AC>0$
+
+## Code
+```{include=files/Skips.mas}
+```
+
+
+
+# Loops
+Let's do the multiplication function $x = Nx+y$ but with loops.
+
+(Tools needed: Jump and Skipcond)
+
+## Code
+```{include=files/LoopMultiply.mas}
+```
+
+# Decoding Memory Content
+Given that the starting value of $PC=000$, what does this program do?
+
+![Decoding Memory Content](files/easyDecodeMemory.png "Main Memory Content")
+
+## Code
+```{include=files/decodingMemoryContent.mas}
+```
+
+# Finding the unknown
+What is the value of UNKNOWN for the function to be  $A = 2Y - Z$ 
+
+## Code
+```{include=files/UnknownValue.mas}
+```
+
+
+# Array
+```{include=files/ArrayMarie.mas}
+```

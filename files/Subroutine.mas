@@ -1,0 +1,26 @@
+﻿// Subroutines Aka Functions
+
+Start,		Jns Function
+		Load X
+                Output
+		Jns Function
+                Load X
+                Output
+                Jns Function
+                Output
+                Halt
+
+// Just a memory location where we are going to 
+// store the address of the address of the instruction
+// we skipped to get to this point
+Function,	HEX 0
+		Load X
+                Add  X
+                Subt ONE
+                Store X
+                // Want to go back to where we were
+                JumpI Function
+
+// Variables
+ONE,		DEC 1
+X,		DEC 3

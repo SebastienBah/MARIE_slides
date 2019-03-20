@@ -1,0 +1,15 @@
+<style type="text/css">
+/*
+ * customCss.css
+ * Copyright (C) 2019 Sebastien Bah
+ *
+ * Distributed under terms of the MIT license.
+ */
+
+/* Custom */
+.reveal h1 {font-size: 2em;}
+.reveal pre.stretch code {
+  height: 140%;
+  max-height: 140%;
+  box-sizing: content-box;}
+</style>

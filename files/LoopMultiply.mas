@@ -1,0 +1,27 @@
+﻿// Fill out the code to have the function do x = Nx + y
+	Input
+        Store N
+       
+Loop,	Load N
+        Skipcond 800
+        Jump End
+        Subt ONE
+        Store N
+       
+XPart,	Load TEMP
+	Add X
+        Store TEMP
+        Jump Loop
+        
+End,	Load TEMP
+	Add Y
+        Store X
+        Output
+        Halt
+        
+// Variables
+ONE,	DEC 1
+N,	DEC 0
+TEMP,	DEC 0
+X,      DEC 2
+Y,	DEC 5

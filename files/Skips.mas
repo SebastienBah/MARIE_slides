@@ -1,0 +1,19 @@
+﻿// Decoding memory content
+A,	LOAD Z
+	Output
+        Subt X
+        Skipcond 800
+        Jump B
+        Jump End
+B,	Load Z
+	Add ONE
+        Store Z
+        Jump A
+End, 	Output
+	Halt
+
+// Variables
+ONE,	DEC 1
+X, 	DEC 5
+Y,	DEC 3
+Z,	DEC 0

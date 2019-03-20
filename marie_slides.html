@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Sebastien Bah">
+  <title>MARIE Examples</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="./reveal.js/css/reveal.css">
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="./reveal.js/css/theme/league.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? './reveal.js/css/print/pdf.css' : './reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="./reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <style type="text/css">
+  /*
+   * customCss.css
+   * Copyright (C) 2019 Sebastien Bah
+   *
+   * Distributed under terms of the MIT license.
+   */
+  
+  /* Custom */
+  .reveal h1 {font-size: 2em;}
+  .reveal pre.stretch code {
+    height: 140%;
+    max-height: 140%;
+    box-sizing: content-box;}
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">MARIE Examples</h1>
+  <p class="author">Sebastien Bah</p>
+  <p class="date">March 2019</p>
+</section>
+
+<section id="setup" class="title-slide slide level1"><h1>Setup</h1><p>Things you will need:</p>
+<ul>
+<li class="fragment"><a href="https://github.com/MARIE-js/MARIE.js/wiki/MARIE-Instruction-Set-(with-Opcodes)">Documentation</a></li>
+<li class="fragment"><a href="https://marie.js.org/#">Simulator</a></li>
+</ul></section>
+<section><section id="multiplication" class="title-slide slide level1"><h1>Multiplication</h1><p>How do you multiply? Let’s say you want to do <span class="math inline">\(x = 5x+y\)</span> ?</p>
+<p>Write a quick function?</p></section><section id="code" class="slide level2">
+<h2>Code</h2>
+<pre><code>// Fill out the code to have the function do x = 5x + y
+
+// Code here
+
+
+// Variables
+X,      DEC 6
+Y,	DEC 8
+</code></pre>
+</section><section id="candidate" class="slide level2">
+<h2>Candidate</h2>
+<pre><code>﻿// Fill out the code to have the function do x = 5x + y
+	Load X
+        Add X
+        Add X
+        Add X
+        Add X
+        Add Y
+        Store X
+// Variables
+X,      DEC 6
+Y,	DEC 8
+</code></pre>
+</section></section>
+<section id="jumps" class="title-slide slide level1"><h1>Jumps</h1><pre><code>﻿// Jumps
+// What is the final values of X and Y AND what is the output?
+
+A,			Clear
+B,			Input
+C,			Jump K
+D,			Jump F
+E,			Jump H
+F,			Store X
+G,			Jump L
+H,			Store Y
+I,			Output
+J,			Halt
+K,			Jump D
+L,			HEX 9008
+
+// Variables
+X, 			DEC 0
+Y,			DEC 0
+</code></pre></section>
+<section><section id="subroutines" class="title-slide slide level1"><h1>Subroutines</h1><p><em>Recall</em>:</p>
+<ul>
+<li class="fragment"><strong>JnS</strong> –&gt; <em>Stores</em> the value of PC at address X and <em>Jumps</em> to X+1<br />
+</li>
+<li class="fragment"><strong>JumpI</strong> –&gt; Uses the <em>value at the memory address X</em> as the addres to <em>Jump</em> to</li>
+</ul></section><section id="code-1" class="slide level2">
+<h2>Code</h2>
+<pre><code>﻿// Subroutines Aka Functions
+
+Start,		Jns Function
+		Load X
+                Output
+		Jns Function
+                Load X
+                Output
+                Jns Function
+                Output
+                Halt
+
+// Just a memory location where we are going to 
+// store the address of the address of the instruction
+// we skipped to get to this point
+Function,	HEX 0
+		Load X
+                Add  X
+                Subt ONE
+                Store X
+                // Want to go back to where we were
+                JumpI Function
+
+// Variables
+ONE,		DEC 1
+X,		DEC 3
+</code></pre>
+</section></section>
+<section><section id="skip-conditions" class="title-slide slide level1"><h1>Skip conditions</h1><p><em>Recall</em>:</p>
+<ul>
+<li class="fragment">Skipcond 000 -&gt; Skips next line if <span class="math inline">\(AC&lt;0\)</span></li>
+<li class="fragment">Skipcond 400 -&gt; Skips next line if <span class="math inline">\(AC=0\)</span></li>
+<li class="fragment">Skipcond 800 -&gt; Skips next line if <span class="math inline">\(AC&gt;0\)</span></li>
+</ul></section><section id="code-2" class="slide level2">
+<h2>Code</h2>
+<pre><code>﻿// Decoding memory content
+A,	LOAD Z
+	Output
+        Subt X
+        Skipcond 800
+        Jump B
+        Jump End
+B,	Load Z
+	Add ONE
+        Store Z
+        Jump A
+End, 	Output
+	Halt
+
+// Variables
+ONE,	DEC 1
+X, 	DEC 5
+Y,	DEC 3
+Z,	DEC 0
+</code></pre>
+</section></section>
+<section><section id="loops" class="title-slide slide level1"><h1>Loops</h1><p>Let’s do the multiplication function <span class="math inline">\(x = Nx+y\)</span> but with loops.</p>
+<p>(Tools needed: Jump and Skipcond)</p></section><section id="code-3" class="slide level2">
+<h2>Code</h2>
+<pre><code>﻿// Fill out the code to have the function do x = Nx + y
+	Input
+        Store N
+       
+Loop,	Load N
+        Skipcond 800
+        Jump End
+        Subt ONE
+        Store N
+       
+XPart,	Load TEMP
+	Add X
+        Store TEMP
+        Jump Loop
+        
+End,	Load TEMP
+	Add Y
+        Store X
+        Output
+        Halt
+        
+// Variables
+ONE,	DEC 1
+N,	DEC 0
+TEMP,	DEC 0
+X,      DEC 2
+Y,	DEC 5
+</code></pre>
+</section></section>
+<section><section id="decoding-memory-content" class="title-slide slide level1"><h1>Decoding Memory Content</h1><p>Given that the starting value of <span class="math inline">\(PC=000\)</span>, what does this program do?</p>
+<figure>
+<img data-src="files/easyDecodeMemory.png" title="Main Memory Content" alt="Decoding Memory Content" /><figcaption>Decoding Memory Content</figcaption>
+</figure></section><section id="code-4" class="slide level2">
+<h2>Code</h2>
+<pre><code>﻿// Decoding memroy content
+	Clear
+        Jump C
+B,	Clear
+	Load X
+        Subt Y
+        Add ONE
+C,	Skipcond 400
+	Jump End
+        Jump B
+End, 	Output
+	Halt
+
+// Variables
+ONE,	DEC 1
+X, 	DEC 16
+Y,	DEC 8
+</code></pre>
+</section></section>
+<section><section id="finding-the-unknown" class="title-slide slide level1"><h1>Finding the unknown</h1><p>What is the value of UNKNOWN for the function to be <span class="math inline">\(A = 2Y - Z\)</span></p></section><section id="code-5" class="slide level2">
+<h2>Code</h2>
+<pre><code>﻿// What is the value of UNKNOWN for the 
+//      function to be  A = 2Y - Z 
+                Input
+                Store UNKNOWN
+           
+Start,          Load UNKNOWN
+		Subt ONE
+                Store UNKNOWN
+                Skipcond 800
+                Jump End
+            
+Ops,		Load Y
+		Add ONE
+		Subt Z
+                Store A
+                Jump Start
+            
+// End of your function
+End, 		Load A
+		Add Y
+                Subt ONE
+                Store A
+		Load UNKNOWN
+		Subt TWO
+           	Store UNKNOWN
+		Skipcond 000
+                Jump End
+                Load A
+		Output
+                Halt
+
+// Constants
+ONE,		DEC	1
+TWO,		DEC	2
+THREE,		DEC 	3
+// Variables
+UNKNOWN, 	DEC 	0
+Y,		DEC 	5
+Z, 		DEC	34
+A,		DEC 	0
+</code></pre>
+</section></section>
+<section id="array" class="title-slide slide level1"><h1>Array</h1><pre><code>﻿// Stores the amount of numbers that you want (determined by your input)
+// And prints them out at the end
+
+// EX: first input 8 (dec)
+// Subsequent: [67, 79, 77, 80, 32, 50, 50, 56] (all dec)
+// Put your output mode to unicode
+		ORG 010
+Start,     	Input
+		Store LenArray
+Loop,		Load LenArray
+		Subt Index
+		Skipcond 800
+                Jump DisplayAll
+
+// Gets the next number to store 
+GetInput, 	Load StartIndex
+		Add Index
+                Store NextPos
+                // Take input now
+                Input
+                StoreI NextPos
+		JnS IncrIndex
+                Jump Loop
+
+// Function to Increment Index            
+IncrIndex,	Hex 0
+		Load Index
+		Add ONE
+                Store Index
+		JumpI IncrIndex
+
+// Display all the elements in array
+DisplayAll,	Clear
+		Store Index
+LoopOutput,	Load LenArray
+		Subt Index
+                Skipcond 800
+                Jump End
+                Load StartIndex
+		Add Index
+                Store NextPos
+		LoadI NextPos
+		Output
+		Jns IncrIndex
+		Jump LoopOutput
+
+// Termination point
+End,		Halt            
+
+// Variables
+ONE, 		DEC 1
+LenArray, 	DEC 0
+StartIndex,	HEX 10
+NextPos,	HEX 0
+Index, 		DEC 0
+</code></pre></section>
+    </div>
+  </div>
+
+  <script src="./reveal.js/lib/js/head.min.js"></script>
+  <script src="./reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: './reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: './reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: './reveal.js/plugin/math/math.js', async: true },
+          { src: './reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

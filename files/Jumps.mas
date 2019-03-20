@@ -1,0 +1,19 @@
+﻿// Jumps
+// What is the final values of X and Y AND what is the output?
+
+A,			Clear
+B,			Input
+C,			Jump K
+D,			Jump F
+E,			Jump H
+F,			Store X
+G,			Jump L
+H,			Store Y
+I,			Output
+J,			Halt
+K,			Jump D
+L,			HEX 9008
+
+// Variables
+X, 			DEC 0
+Y,			DEC 0

@@ -1,0 +1,17 @@
+﻿// Decoding memroy content
+	Clear
+        Jump C
+B,	Clear
+	Load X
+        Subt Y
+        Add ONE
+C,	Skipcond 400
+	Jump End
+        Jump B
+End, 	Output
+	Halt
+
+// Variables
+ONE,	DEC 1
+X, 	DEC 16
+Y,	DEC 8

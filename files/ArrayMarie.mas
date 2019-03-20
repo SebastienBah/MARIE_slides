@@ -1,0 +1,55 @@
+﻿// Stores the amount of numbers that you want (determined by your input)
+// And prints them out at the end
+
+// EX: first input 8 (dec)
+// Subsequent: [67, 79, 77, 80, 32, 50, 50, 56] (all dec)
+// Put your output mode to unicode
+		ORG 010
+Start,     	Input
+		Store LenArray
+Loop,		Load LenArray
+		Subt Index
+		Skipcond 800
+                Jump DisplayAll
+
+// Gets the next number to store 
+GetInput, 	Load StartIndex
+		Add Index
+                Store NextPos
+                // Take input now
+                Input
+                StoreI NextPos
+		JnS IncrIndex
+                Jump Loop
+
+// Function to Increment Index            
+IncrIndex,	Hex 0
+		Load Index
+		Add ONE
+                Store Index
+		JumpI IncrIndex
+
+// Display all the elements in array
+DisplayAll,	Clear
+		Store Index
+LoopOutput,	Load LenArray
+		Subt Index
+                Skipcond 800
+                Jump End
+                Load StartIndex
+		Add Index
+                Store NextPos
+		LoadI NextPos
+		Output
+		Jns IncrIndex
+		Jump LoopOutput
+
+// Termination point
+End,		Halt            
+
+// Variables
+ONE, 		DEC 1
+LenArray, 	DEC 0
+StartIndex,	HEX 10
+NextPos,	HEX 0
+Index, 		DEC 0

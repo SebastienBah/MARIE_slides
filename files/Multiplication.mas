@@ -1,0 +1,11 @@
+﻿// Fill out the code to have the function do x = 5x + y
+	Load X
+        Add X
+        Add X
+        Add X
+        Add X
+        Add Y
+        Store X
+// Variables
+X,      DEC 6
+Y,	DEC 8
