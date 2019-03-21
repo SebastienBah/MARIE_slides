@@ -131,6 +131,8 @@ Y,	DEC 8
         Add X
         Add Y
         Store X
+        Halt
+
 // Variables
 X,      DEC 6
 Y,	DEC 8
@@ -324,6 +326,7 @@ A,		DEC 	0
 
 // EX: first input 8 (dec)
 // Subsequent: [67, 79, 77, 80, 32, 50, 50, 56] (all dec)
+// or [&#39;0x43&#39;, &#39;0x4f&#39;, &#39;0x4d&#39;, &#39;0x50&#39;, &#39;0x20&#39;, &#39;0x32&#39;, &#39;0x32&#39;, &#39;0x38&#39;]
 // Put your output mode to unicode
 		ORG 010
 Start,     	Input
@@ -371,7 +374,7 @@ End,		Halt
 // Variables
 ONE, 		DEC 1
 LenArray, 	DEC 0
-StartIndex,	HEX 10
+StartIndex,	HEX 0
 NextPos,	HEX 0
 Index, 		DEC 0
 </code></pre></section>

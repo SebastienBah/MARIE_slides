@@ -6,6 +6,8 @@
         Add X
         Add Y
         Store X
+        Halt
+
 // Variables
 X,      DEC 6
 Y,	DEC 8
